@@ -22,6 +22,13 @@ app.config.suppress_callback_exceptions = True
 # Load data from csv
 def load_data():
     # To do: Completar la función 
+    data = pd.read_csv("datos_energia.csv")
+    # Convertir la columna de fecha a formato datetime
+    data['time'] = pd.to_datetime(data['time'])
+    # Establecer la columna de fecha como el índice del DataFrame
+    data.set_index('time', inplace=True)
+
+    return data
     
 
 # Cargar datos
@@ -239,5 +246,6 @@ def update_output_div(date, hour, proy):
 
 
 # Run the server
-if __name__ == "__main__":
-    app.run_server(debug=True)
+if __name__ == '__main__':
+    app.run_server(host='127.0.0.1', port=8050)
+    
